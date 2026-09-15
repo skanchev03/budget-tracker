@@ -433,19 +433,33 @@ Transfers are excluded from income and expense statistics to prevent double-coun
 
 ## Screenshots
 
-Screenshots of the application interface will be added here.
+### Login
 
-Planned screenshots include:
+![Login](screenshots/login.png)
 
-- Login
-- Registration
-- Dashboard
-- Accounts
-- Account details
-- Transactions
-- Categories
-- Profile
-- Mobile responsive views
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Accounts
+
+![Accounts](screenshots/accounts.png)
+
+### Transactions
+
+![Transactions](screenshots/transactions.png)
+
+### Categories
+
+![Categories](screenshots/categories.png)
+
+### Profile & Settings
+
+![Profile & Settings](screenshots/profile.png)
+
+### Mobile Dashboard
+
+![Mobile Dashboard](screenshots/mobile-dashboard.png)
 
 ---
 
