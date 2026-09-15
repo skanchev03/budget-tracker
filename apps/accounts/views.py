@@ -1,7 +1,11 @@
-from django.views.decorators.http import require_POST
+import json
+
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.db.models import Max
-from django.shortcuts import get_object_or_404, redirect, render
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_POST
 
 from apps.accounts.forms import CreateAccountForm, UpdateAccountForm
 from apps.accounts.models import Account

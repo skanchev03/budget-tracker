@@ -40,7 +40,7 @@ class CreateAccountForm(forms.Form):
         max_digits=19,
         decimal_places=4,
         required=False,
-        initial=None,
+        initial=Decimal("0"),
         label="Opening balance",
     )
 

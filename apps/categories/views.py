@@ -1,17 +1,18 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 
 from apps.categories.forms import CategoryForm, SubcategoryForm
-from apps.categories.models import Category, Subcategory
 from apps.categories.services import (
     create_category,
     create_subcategory,
     delete_category,
+    delete_subcategory,
     get_categories_for_user,
+    get_category_for_user,
     get_subcategories_for_user,
+    get_subcategory_for_user,
     update_category,
     update_subcategory,
-    delete_subcategory,
 )
 
 
@@ -59,9 +60,9 @@ def category_create(request):
 
 @login_required
 def category_update(request, category_id):
-    category = get_object_or_404(
-        Category,
-        pk=category_id,
+    category = get_category_for_user(
+        request.user,
+        category_id,
     )
 
     if request.method == "POST":
@@ -100,9 +101,9 @@ def category_update(request, category_id):
 
 @login_required
 def category_delete(request, category_id):
-    category = get_object_or_404(
-        Category,
-        pk=category_id,
+    category = get_category_for_user(
+        request.user,
+        category_id,
     )
 
     if request.method == "POST":
@@ -153,9 +154,9 @@ def subcategory_create(request):
 
 @login_required
 def subcategory_update(request, subcategory_id):
-    subcategory = get_object_or_404(
-        Subcategory,
-        pk=subcategory_id,
+    subcategory = get_subcategory_for_user(
+        request.user,
+        subcategory_id,
     )
 
     if request.method == "POST":
@@ -193,9 +194,9 @@ def subcategory_update(request, subcategory_id):
 
 @login_required
 def subcategory_delete(request, subcategory_id):
-    subcategory = get_object_or_404(
-        Subcategory,
-        pk=subcategory_id,
+    subcategory = get_subcategory_for_user(
+        request.user,
+        subcategory_id,
     )
 
     if request.method == "POST":

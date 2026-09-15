@@ -1,6 +1,5 @@
 from decimal import Decimal, ROUND_HALF_UP
 
-from django.db.models import Sum
 from django.utils import timezone
 
 from apps.accounts.models import Account

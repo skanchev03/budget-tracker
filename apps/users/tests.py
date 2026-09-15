@@ -889,7 +889,7 @@ class LoginViewTests(TestCase):
 
         self.assertRedirects(
             response,
-            reverse("dashboard"),
+            reverse("dashboard:dashboard"),
         )
 
         session = self.client.session
@@ -1052,7 +1052,7 @@ class VerifyTwoFactorViewTests(TestCase):
 
         self.assertRedirects(
             response,
-            reverse("dashboard"),
+            reverse("dashboard:dashboard"),
         )
 
         session = self.client.session
@@ -1072,7 +1072,7 @@ class VerifyTwoFactorViewTests(TestCase):
 
         self.assertRedirects(
             response,
-            reverse("dashboard"),
+            reverse("dashboard:dashboard"),
         )
 
         self.assertNotIn(
@@ -1090,7 +1090,7 @@ class VerifyTwoFactorViewTests(TestCase):
 
         self.assertRedirects(
             response,
-            reverse("dashboard"),
+            reverse("dashboard:dashboard"),
         )
 
         two_factor_code = (
@@ -1214,7 +1214,7 @@ class VerifyTwoFactorViewTests(TestCase):
 
         self.assertRedirects(
             first_response,
-            reverse("dashboard"),
+            reverse("dashboard:dashboard"),
         )
 
         self.client.logout()
