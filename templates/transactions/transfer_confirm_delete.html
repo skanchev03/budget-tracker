@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Delete Transfer" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+
+    <a
+        href="{% url 'transaction-list' %}"
+        class="back-link"
+    >
+        ← {% trans "Back to Transactions" %}
+    </a>
+
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>{% trans "Delete Transfer" %}</h1>
+
+            <p class="page-subtitle">
+                {% trans "Confirm that you want to delete this transfer." %}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-card delete-confirmation-card">
+
+        <div class="delete-warning-icon">
+            ⚠️
+        </div>
+
+
+        <h2>{% trans "Are you sure?" %}</h2>
+
+
+        <p class="delete-warning-text">
+            {% trans "You are about to permanently delete this transfer:" %}
+        </p>
+
+
+        <div class="transfer-summary">
+
+            <div class="transfer-summary-row">
+
+                <span>{% trans "From" %}</span>
+
+                <strong>
+                    {{ transfer.from_account.name }}
+                </strong>
+
+            </div>
+
+
+            <div class="transfer-summary-row">
+
+                <span>{% trans "To" %}</span>
+
+                <strong>
+                    {{ transfer.to_account.name }}
+                </strong>
+
+            </div>
+
+
+            <div class="transfer-summary-row">
+
+                <span>{% trans "Amount" %}</span>
+
+                <strong>
+
+                    {{ transfer.amount_from }}
+                    {{ transfer.from_currency.code }}
+
+                    {% if transfer.from_currency_id != transfer.to_currency_id %}
+
+                        →
+                        {{ transfer.amount_to }}
+                        {{ transfer.to_currency.code }}
+
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="transfer-summary-row">
+
+                <span>{% trans "Date" %}</span>
+
+                <strong>
+                    {{ transfer.occurred_at|date:"d.m.Y H:i" }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <p class="delete-balance-warning">
+
+            {% trans "Deleting this transfer will automatically restore the affected account balances." %}
+
+        </p>
+
+
+        <form method="post">
+
+            {% csrf_token %}
+
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'transaction-list' %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="button button-danger"
+                >
+                    {% trans "Delete Transfer" %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

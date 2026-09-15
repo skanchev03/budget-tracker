@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Add Transaction" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-page transaction-form-page">
+
+    <a href="{% url 'transaction-list' %}" class="back-link">
+        ← {% trans "Back to Transactions" %}
+    </a>
+
+
+    <div class="page-header">
+        <div>
+            <h1>{% trans "Add Transaction" %}</h1>
+
+            <p class="page-subtitle">
+                {% trans "Record an expense or income." %}
+            </p>
+        </div>
+    </div>
+
+
+    <div class="form-card">
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+
+        <form method="post">
+
+            {% csrf_token %}
+
+
+            <!-- Type -->
+            <div class="form-group">
+
+                <label for="{{ form.type.id_for_label }}">
+                    {% trans "Type" %}
+                </label>
+
+                {{ form.type }}
+
+                {% if form.type.errors %}
+                    <div class="field-error">
+                        {{ form.type.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Category -->
+            <div class="form-group">
+
+                <label for="{{ form.category.id_for_label }}">
+                    {% trans "Category" %}
+                </label>
+
+                {{ form.category }}
+
+                {% if form.category.errors %}
+                    <div class="field-error">
+                        {{ form.category.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Subcategory -->
+            <div class="form-group">
+
+                <label for="{{ form.subcategory.id_for_label }}">
+                    {% trans "Subcategory" %}
+                </label>
+
+                {{ form.subcategory }}
+
+                {% if form.subcategory.errors %}
+                    <div class="field-error">
+                        {{ form.subcategory.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Account -->
+            <div class="form-group">
+
+                <label for="{{ form.account.id_for_label }}">
+                    {% trans "Account" %}
+                </label>
+
+                {{ form.account }}
+
+                {% if form.account.errors %}
+                    <div class="field-error">
+                        {{ form.account.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Amount -->
+            <div class="form-group">
+
+                <label for="{{ form.amount.id_for_label }}">
+                    {% trans "Amount" %}
+                </label>
+
+                <div class="amount-input-wrapper">
+                    {{ form.amount }}
+                </div>
+
+                {% if form.amount.errors %}
+                    <div class="field-error">
+                        {{ form.amount.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "The amount must be greater than zero." %}
+                </div>
+
+            </div>
+
+
+            <!-- Date and time -->
+            <div class="form-group">
+
+                <label for="{{ form.occurred_at.id_for_label }}">
+                    {% trans "Date & Time" %}
+                </label>
+
+                {{ form.occurred_at }}
+
+                {% if form.occurred_at.errors %}
+                    <div class="field-error">
+                        {{ form.occurred_at.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Person -->
+            <div class="form-group">
+
+                <label for="{{ form.person.id_for_label }}">
+                    {% trans "Person" %}
+                </label>
+
+                {{ form.person }}
+
+                {% if form.person.errors %}
+                    <div class="field-error">
+                        {{ form.person.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "Optional." %}
+                </div>
+
+            </div>
+
+
+            <!-- Description -->
+            <div class="form-group">
+
+                <label for="{{ form.description.id_for_label }}">
+                    {% trans "Comment" %}
+                </label>
+
+                {{ form.description }}
+
+                {% if form.description.errors %}
+                    <div class="field-error">
+                        {{ form.description.errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "Optional." %}
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'transaction-list' %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                >
+                    {% trans "Save Transaction" %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% block extra_js %}
+    {% load static %}
+    <script src="{% static 'transactions/transaction_form.js' %}"></script>
+{% endblock %}
+
+{% endblock %}

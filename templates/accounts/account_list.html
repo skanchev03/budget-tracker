@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Accounts - Budget Tracker" %}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    <div>
+        <h1>{% trans "My Accounts" %}</h1>
+        <p class="page-subtitle">
+            {% trans "Manage your cash, bank accounts and other balances." %}
+        </p>
+    </div>
+
+    <a href="{% url 'accounts:account_create' %}" class="button button-primary">
+        + {% trans "Add Account" %}
+    </a>
+</div>
+
+
+{% if accounts %}
+
+    <div
+        class="accounts-grid"
+        id="accounts-grid"
+    >
+
+        {% for account in accounts %}
+
+            <a
+                href="{% url 'accounts:account_detail' account.id %}"
+                class="account-card"
+                data-account-id="{{ account.id }}"
+                draggable="true"
+                style="--account-color: {{ account.color }};"
+            >
+
+                <div class="account-card-header">
+
+                    <div class="account-identity">
+                        <span class="account-emoji">
+                            {{ account.emoji }}
+                        </span>
+
+                        <div>
+                            <h2>{{ account.name }}</h2>
+
+                            <span class="account-currency">
+                                {{ account.currency.code }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <span
+                        class="account-drag-handle"
+                        aria-label="{% trans 'Drag to reorder account' %}"
+                        title="{% trans 'Drag to reorder' %}"
+                    >
+                        ⋮⋮
+                    </span>
+
+                </div>
+
+
+                <div class="account-card-balance">
+
+                    <span class="balance-label">
+                        {% trans "Balance" %}
+                    </span>
+
+                    <strong>
+                        {{ account.current_balance }}
+                        {{ account.currency.symbol }}
+                    </strong>
+
+                </div>
+
+            </a>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <div class="empty-state">
+
+        <div class="empty-state-icon">
+            💰
+        </div>
+
+        <h2>{% trans "No accounts yet" %}</h2>
+
+        <p>
+            {% trans "Create your first account to start tracking your budget." %}
+        </p>
+
+        <a
+            href="{% url 'accounts:account_create' %}"
+            class="button button-primary"
+        >
+            + {% trans "Create Your First Account" %}
+        </a>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const accountsGrid = document.getElementById("accounts-grid");
+
+        if (!accountsGrid) {
+            return;
+        }
+
+        let draggedCard = null;
+
+        const accountCards = accountsGrid.querySelectorAll(".account-card");
+
+        accountCards.forEach(function (card) {
+
+            card.addEventListener("dragstart", function (event) {
+                draggedCard = card;
+
+                card.classList.add("account-card-dragging");
+
+                event.dataTransfer.effectAllowed = "move";
+                event.dataTransfer.setData(
+                    "text/plain",
+                    card.dataset.accountId
+                );
+            });
+
+            card.addEventListener("dragend", function () {
+                card.classList.remove("account-card-dragging");
+
+                accountsGrid
+                    .querySelectorAll(".account-card-drag-over")
+                    .forEach(function (item) {
+                        item.classList.remove("account-card-drag-over");
+                    });
+
+                draggedCard = null;
+            });
+
+            card.addEventListener("dragover", function (event) {
+                event.preventDefault();
+
+                if (!draggedCard || draggedCard === card) {
+                    return;
+                }
+
+                card.classList.add("account-card-drag-over");
+
+                const rect = card.getBoundingClientRect();
+                const middleX = rect.left + rect.width / 2;
+
+                if (event.clientX < middleX) {
+                    accountsGrid.insertBefore(draggedCard, card);
+                } else {
+                    accountsGrid.insertBefore(
+                        draggedCard,
+                        card.nextSibling
+                    );
+                }
+            });
+
+            card.addEventListener("dragleave", function () {
+                card.classList.remove("account-card-drag-over");
+            });
+
+            card.addEventListener("drop", function (event) {
+                event.preventDefault();
+
+                card.classList.remove("account-card-drag-over");
+
+                saveAccountOrder();
+            });
+        });
+
+
+        function saveAccountOrder() {
+            const accountIds = Array.from(
+                accountsGrid.querySelectorAll(".account-card")
+            ).map(function (card) {
+                return Number(card.dataset.accountId);
+            });
+
+            fetch("{% url 'accounts:account_reorder' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify({
+                    account_ids: accountIds,
+                }),
+            })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Failed to save account order.");
+                }
+
+                return response.json();
+            })
+            .then(function (data) {
+                if (!data.success) {
+                    throw new Error("Failed to save account order.");
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+                window.location.reload();
+            });
+        }
+
+
+        function getCookie(name) {
+            const cookies = document.cookie.split(";");
+
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+
+                if (cookie.startsWith(name + "=")) {
+                    return decodeURIComponent(
+                        cookie.substring(name.length + 1)
+                    );
+                }
+            }
+
+            return null;
+        }
+    });
+</script>
+{% endblock %}

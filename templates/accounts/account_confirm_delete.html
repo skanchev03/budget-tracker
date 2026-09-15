@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Delete" %} {{ account.name }} - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+
+    <div class="page-header">
+        <div>
+            <a
+                href="{% url 'accounts:account_detail' account.id %}"
+                class="back-link"
+            >
+                ← {% trans "Back to Account" %}
+            </a>
+
+            <h1>{% trans "Delete Account" %}</h1>
+
+            <p class="page-subtitle">
+                {% trans "Permanently remove this account from your budget tracker." %}
+            </p>
+        </div>
+    </div>
+
+
+    <div class="delete-card">
+
+        <div class="delete-icon">
+            ⚠️
+        </div>
+
+        <h2>
+            {% trans 'Delete' %} "{{ account.name }}"?
+        </h2>
+
+        <p>
+            {% trans "You are about to delete this account. This action cannot be undone." %}
+        </p>
+
+        <div class="delete-account-preview">
+
+            <div class="account-detail-emoji">
+                {{ account.emoji }}
+            </div>
+
+            <div>
+                <strong>{{ account.name }}</strong>
+
+                <span>
+                    {{ account.currency.code }}
+                </span>
+
+                <span>
+                    {{ account.current_balance }}
+                    {{ account.currency.symbol }}
+                </span>
+            </div>
+
+        </div>
+
+
+        <form
+            method="post"
+            action="{% url 'accounts:account_delete' account.id %}"
+        >
+
+            {% csrf_token %}
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'accounts:account_detail' account.id %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+                <button
+                    type="submit"
+                    class="button button-danger"
+                >
+                    {% trans "Delete Account" %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

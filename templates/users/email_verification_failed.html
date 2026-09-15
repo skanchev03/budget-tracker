@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Email Verification Failed" %} - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <div class="auth-logo">⚠️</div>
+
+            <h1>{% trans "Email verification failed" %}</h1>
+
+            <p>
+                {% trans "We couldn't verify your email address." %}
+            </p>
+        </div>
+
+        <div class="auth-message">
+            <p>
+                {% trans "The verification link is invalid, expired, or has already been used." %}
+            </p>
+
+            <p>
+                {% trans "Please request a new verification email if you still need to verify your account." %}
+            </p>
+        </div>
+
+        <div class="auth-footer">
+            <a href="{% url 'login' %}" class="auth-submit auth-submit-link">
+                {% trans "Continue to login" %}
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

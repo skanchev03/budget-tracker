@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ title }} - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+
+    <div class="page-header">
+        <div>
+            <h1>{{ title }}</h1>
+
+            <p class="page-subtitle">
+                {% if account %}
+                    {% trans "Update your account details and preferences." %}
+                {% else %}
+                    {% trans "Add a new account to your budget tracker." %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+
+    <div class="form-card">
+
+        <form method="post">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">
+                    {% trans "Account name" %}
+                </label>
+
+                {{ form.name }}
+
+                {{ form.name.errors }}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ form.emoji.id_for_label }}">
+                    {% trans "Emoji" %}
+                </label>
+
+                {{ form.emoji }}
+
+                {{ form.emoji.errors }}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ form.color.id_for_label }}">
+                    {% trans "Color" %}
+                </label>
+
+                {{ form.color }}
+
+                {{ form.color.errors }}
+            </div>
+
+
+            {% if not account %}
+
+                <div class="form-group">
+                    <label for="{{ form.currency.id_for_label }}">
+                        {% trans "Currency" %}
+                    </label>
+
+                    {{ form.currency }}
+
+                    {{ form.currency.errors }}
+                </div>
+
+
+                <div class="form-group">
+                    <label for="{{ form.opening_balance.id_for_label }}">
+                        {% trans "Opening balance" %}
+                    </label>
+
+                    {{ form.opening_balance }}
+
+                    {{ form.opening_balance.errors }}
+                </div>
+
+            {% endif %}
+
+
+            {% if account %}
+
+                <div class="form-group">
+                    <label for="{{ form.display_order.id_for_label }}">
+                        {% trans "Display order" %}
+                    </label>
+
+                    {{ form.display_order }}
+
+                    {{ form.display_order.errors }}
+                </div>
+
+
+                <div class="form-group form-checkbox">
+                    {{ form.is_active }}
+
+                    <label for="{{ form.is_active.id_for_label }}">
+                        {% trans "Active" %}
+                    </label>
+
+                    {{ form.is_active.errors }}
+                </div>
+
+            {% else %}
+
+                <div class="form-group">
+                    <label for="{{ form.display_order.id_for_label }}">
+                        {% trans "Display order" %}
+                    </label>
+
+                    {{ form.display_order }}
+
+                    {{ form.display_order.errors }}
+                </div>
+
+            {% endif %}
+
+
+            <div class="form-actions">
+
+                <a
+                    href="{% if account %}{% url 'accounts:account_detail' account.id %}{% else %}{% url 'accounts:account_list' %}{% endif %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                >
+                    {{ submit_text }}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

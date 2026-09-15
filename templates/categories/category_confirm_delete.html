@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Delete Category" %}{% endblock %}
+
+{% block content %}
+<div class="form-page">
+
+    <a href="{% url 'categories:category_list' %}" class="back-link">
+        ← {% trans "Back to Categories" %}
+    </a>
+
+    <div class="page-header">
+        <div>
+            <h1>{% trans "Delete Category" %}</h1>
+            <p class="page-subtitle">
+                {% trans "Confirm that you want to delete this category." %}
+            </p>
+        </div>
+    </div>
+
+    <div class="form-card delete-confirmation-card">
+
+        <div class="delete-warning-icon">
+            ⚠️
+        </div>
+
+        <h2>{% trans "Are you sure?" %}</h2>
+
+        <p class="delete-warning-text">
+            {% trans "You are about to permanently delete this custom category:" %}
+        </p>
+
+        <div class="category-delete-summary">
+
+            <div class="category-delete-icon">
+                {{ category.emoji }}
+            </div>
+
+            <div>
+                <strong>{{ category.name }}</strong>
+
+                <span class="category-badge custom">
+                    {% trans "Custom" %}
+                </span>
+            </div>
+
+        </div>
+
+        <p class="delete-balance-warning">
+            {% trans "This action cannot be undone." %}
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'categories:category_list' %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+                <button
+                    type="submit"
+                    class="button button-danger"
+                >
+                    {% trans "Delete Category" %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}

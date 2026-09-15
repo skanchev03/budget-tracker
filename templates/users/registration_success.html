@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Registration Successful" %} - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <div class="auth-logo">✉️</div>
+
+            <h1>{% trans "Registration successful!" %}</h1>
+
+            <p>
+                {% trans "Your Budget Tracker account has been created successfully." %}
+            </p>
+        </div>
+
+        <div class="auth-message">
+            <p>
+                {% trans "We've sent a verification link to your email address." %}
+            </p>
+
+            <p>
+                {% trans "Please check your inbox and click the link to verify your account before signing in." %}
+            </p>
+        </div>
+
+        <div class="auth-footer">
+            <p>
+                {% trans "Already verified?" %}
+                <a href="{% url 'login' %}">{% trans "Sign in" %}</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

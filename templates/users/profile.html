@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Profile & Settings" %}{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+
+    <div class="profile-header">
+        <div>
+            <h1>{% trans "Profile & Settings" %}</h1>
+            <p>{% trans "Manage your personal information and account preferences." %}</p>
+        </div>
+    </div>
+
+    <div class="profile-grid">
+
+        <!-- Profile -->
+        <section class="profile-card">
+            <div class="profile-card-header">
+                <h2>{% trans "Profile" %}</h2>
+                <p>{% trans "Your personal information." %}</p>
+            </div>
+
+            <form method="post"
+                  enctype="multipart/form-data"
+                  class="profile-form">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="form_type" value="profile">
+
+                {% if profile_form.non_field_errors %}
+                    <div class="form-error">
+                        {{ profile_form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="profile-picture-section">
+                    {% if user.profile.profile_picture %}
+                        <img
+                            src="{{ user.profile.profile_picture.url }}"
+                            alt="{% trans 'Profile picture' %}"
+                            class="profile-picture"
+                        >
+                    {% else %}
+                        <div class="profile-picture-placeholder">
+                            {{ user.username|first|upper }}
+                        </div>
+                    {% endif %}
+
+                    <div class="profile-picture-info">
+                        <label for="{{ profile_form.profile_picture.id_for_label }}">
+                            {% trans "Profile picture" %}
+                        </label>
+
+                        {{ profile_form.profile_picture }}
+
+                        {% if profile_form.profile_picture.errors %}
+                            <div class="field-error">
+                                {{ profile_form.profile_picture.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ profile_form.date_of_birth.id_for_label }}">
+                        {% trans "Date of birth" %}
+                    </label>
+
+                    {{ profile_form.date_of_birth }}
+
+                    {% if profile_form.date_of_birth.errors %}
+                        <div class="field-error">
+                            {{ profile_form.date_of_birth.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ profile_form.country.id_for_label }}">
+                        {% trans "Country" %}
+                    </label>
+
+                    {{ profile_form.country }}
+
+                    {% if profile_form.country.errors %}
+                        <div class="field-error">
+                            {{ profile_form.country.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <button type="submit" class="profile-submit">
+                    {% trans "Save profile" %}
+                </button>
+
+            </form>
+        </section>
+
+
+        <!-- Settings -->
+        <section class="profile-card">
+            <div class="profile-card-header">
+                <h2>{% trans "Settings" %}</h2>
+                <p>{% trans "Manage your account preferences." %}</p>
+            </div>
+
+            <form method="post" class="profile-form">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="form_type" value="settings">
+
+                {% if settings_form.non_field_errors %}
+                    <div class="form-error">
+                        {{ settings_form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-field">
+                    <label for="{{ settings_form.base_currency.id_for_label }}">
+                        {% trans "Base currency" %}
+                    </label>
+
+                    {{ settings_form.base_currency }}
+
+                    {% if settings_form.base_currency.errors %}
+                        <div class="field-error">
+                            {{ settings_form.base_currency.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-field">
+                    <label for="{{ settings_form.language.id_for_label }}">
+                        {% trans "Language" %}
+                    </label>
+
+                    {{ settings_form.language }}
+
+                    {% if settings_form.language.errors %}
+                        <div class="field-error">
+                            {{ settings_form.language.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="settings-toggle">
+                    <div>
+                        <strong>{% trans "Two-factor authentication" %}</strong>
+                        <p>
+                            {% trans "Require a verification code when logging in." %}
+                        </p>
+                    </div>
+
+                    <label class="toggle-switch">
+                        {{ settings_form.two_fa_enabled }}
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                {% if settings_form.two_fa_enabled.errors %}
+                    <div class="field-error">
+                        {{ settings_form.two_fa_enabled.errors }}
+                    </div>
+                {% endif %}
+
+                <button type="submit" class="profile-submit">
+                    {% trans "Save settings" %}
+                </button>
+
+            </form>
+        </section>
+
+    </div>
+
+</div>
+{% endblock %}

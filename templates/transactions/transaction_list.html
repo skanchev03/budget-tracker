@@ -1,0 +1,403 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Transactions" %}{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>{% trans "Transactions" %}</h1>
+
+        <p class="page-subtitle">
+            {% trans "View and manage your expenses, incomes and transfers." %}
+        </p>
+    </div>
+
+    <div class="page-actions">
+
+        <a href="{% url 'transaction-create' %}" class="button">
+            + {% trans "Add Transaction" %}
+        </a>
+
+        <a href="{% url 'transfer-create' %}" class="button button-secondary">
+            ↔ {% trans "Transfer" %}
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FILTERS
+     ========================================================= -->
+
+<div class="transactions-card transaction-filters">
+
+    <form method="get">
+
+        <div class="transaction-filter-row">
+
+            <!-- Type -->
+
+            <div class="transaction-filter-field">
+                <label for="filter-kind">{% trans "Type" %}</label>
+
+                <select id="filter-kind" name="kind">
+
+                    <option value="">{% trans "All" %}</option>
+
+                    <option value="expense"
+                        {% if request.GET.kind == "expense" %}selected{% endif %}>
+                        {% trans "Expenses" %}
+                    </option>
+
+                    <option value="income"
+                        {% if request.GET.kind == "income" %}selected{% endif %}>
+                        {% trans "Income" %}
+                    </option>
+
+                    <option value="transfer"
+                        {% if request.GET.kind == "transfer" %}selected{% endif %}>
+                        {% trans "Transfers" %}
+                    </option>
+
+                </select>
+            </div>
+
+
+            <!-- Category -->
+
+            <div class="transaction-filter-field">
+                <label for="filter-category">{% trans "Category" %}</label>
+
+                <select id="filter-category" name="category">
+
+                    <option value="">
+                        {% trans "All categories" %}
+                    </option>
+
+                    {% for category in categories %}
+
+                        <option
+                            value="{{ category.id }}"
+                            {% if request.GET.category == category.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ category.emoji }} {{ category.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+            </div>
+
+
+            <!-- Account -->
+
+            <div class="transaction-filter-field">
+                <label for="filter-account">{% trans "Account" %}</label>
+
+                <select id="filter-account" name="account">
+
+                    <option value="">
+                        {% trans "All accounts" %}
+                    </option>
+
+                    {% for account in accounts %}
+
+                        <option
+                            value="{{ account.id }}"
+                            {% if request.GET.account == account.id|stringformat:"s" %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ account.emoji }} {{ account.name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+            </div>
+
+
+            <!-- Search -->
+
+            <div class="transaction-filter-field transaction-filter-search">
+                <label for="filter-search">{% trans "Search" %}</label>
+
+                <input
+                    type="search"
+                    id="filter-search"
+                    name="search"
+                    value="{{ request.GET.search|default:'' }}"
+                    placeholder="{% trans 'Description, person or account...' %}"
+                >
+            </div>
+
+        </div>
+
+
+        <div class="transaction-filter-row transaction-filter-row-secondary">
+
+            <!-- From -->
+
+            <div class="transaction-filter-field">
+                <label for="filter-date-from">{% trans "From" %}</label>
+
+                <input
+                    type="date"
+                    id="filter-date-from"
+                    name="date_from"
+                    value="{{ request.GET.date_from|default:'' }}"
+                >
+            </div>
+
+
+            <!-- To -->
+
+            <div class="transaction-filter-field">
+                <label for="filter-date-to">{% trans "To" %}</label>
+
+                <input
+                    type="date"
+                    id="filter-date-to"
+                    name="date_to"
+                    value="{{ request.GET.date_to|default:'' }}"
+                >
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="transaction-filter-actions">
+
+                <button type="submit" class="button">
+                    {% trans "Apply Filters" %}
+                </button>
+
+                <a
+                    href="{% url 'transaction-list' %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Reset" %}
+                </a>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- =========================================================
+     HISTORY
+     ========================================================= -->
+
+<div class="transactions-card">
+
+    {% if history %}
+
+        <div class="transaction-list">
+
+            {% for item in history %}
+
+                <div class="transaction-row">
+
+                    {% if item.kind == "transfer" %}
+
+                        <!-- TRANSFER -->
+
+                        <div class="transaction-icon">
+                            ↔
+                        </div>
+
+                        <div class="transaction-main">
+
+                            <div class="transaction-title">
+                                {% trans "Transfer" %}
+                            </div>
+
+                            <div class="transaction-meta">
+                                {{ item.from_account.name }}
+                                →
+                                {{ item.to_account.name }}
+                                ·
+                                {{ item.occurred_at|date:"d.m.Y H:i" }}
+                            </div>
+
+                            {% if item.description %}
+
+                                <div class="transaction-description">
+                                    {{ item.description }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                        <div class="transaction-row-right">
+
+                            <div class="transaction-amount">
+
+                                -{{ item.amount_from }}
+                                {{ item.from_currency.code }}
+
+                                {% if item.from_currency.code != item.to_currency.code %}
+
+                                    → {{ item.amount_to }}
+                                    {{ item.to_currency.code }}
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="transaction-actions">
+
+                                <a
+                                    href="{% url 'transfer-edit' item.id %}"
+                                    class="transaction-edit"
+                                >
+                                    {% trans "Edit" %}
+                                </a>
+
+                                <a
+                                    href="{% url 'transfer-delete' item.id %}"
+                                    class="transaction-delete"
+                                >
+                                    {% trans "Delete" %}
+                                </a>
+
+                            </div>
+
+                        </div>
+
+
+                    {% else %}
+
+                        <!-- EXPENSE / INCOME -->
+
+                        <div class="transaction-icon">
+
+                            {% if item.kind == "expense" %}
+                                {{ item.category.emoji }}
+                            {% else %}
+                                💰
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="transaction-main">
+
+                            <div class="transaction-title">
+
+                                {{ item.category.name }}
+
+                                {% if item.subcategory %}
+                                    · {{ item.subcategory.name }}
+                                {% endif %}
+
+                            </div>
+
+                            <div class="transaction-meta">
+
+                                {{ item.account.name }}
+
+                                {% if item.person %}
+                                    · {{ item.person }}
+                                {% endif %}
+
+                                ·
+
+                                {{ item.occurred_at|date:"d.m.Y H:i" }}
+
+                            </div>
+
+                            {% if item.description %}
+
+                                <div class="transaction-description">
+                                    {{ item.description }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="transaction-row-right">
+
+                            <div
+                                class="transaction-amount
+                                {% if item.kind == 'income' %}
+                                    transaction-income
+                                {% else %}
+                                    transaction-expense
+                                {% endif %}"
+                            >
+
+                                {% if item.amount > 0 %}
+                                    +
+                                {% endif %}
+
+                                {{ item.amount }}
+                                {{ item.currency.code }}
+
+                            </div>
+
+
+                            <div class="transaction-actions">
+
+                                <a
+                                    href="{% url 'transaction-edit' item.id %}"
+                                    class="transaction-edit"
+                                >
+                                    {% trans "Edit" %}
+                                </a>
+
+                                <a
+                                    href="{% url 'transaction-delete' item.id %}"
+                                    class="transaction-delete"
+                                >
+                                    {% trans "Delete" %}
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <div class="empty-state-icon">
+                📭
+            </div>
+
+            <h2>{% trans "No transactions found" %}</h2>
+
+            <p>
+                {% trans "Try changing your filters or add a new transaction." %}
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

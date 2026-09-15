@@ -1,0 +1,975 @@
+# Bulgarian translations for Budget Tracker.
+msgid ""
+msgstr ""
+"Project-Id-Version: Budget Tracker 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-15 13:51+0300\n"
+"PO-Revision-Date: 2026-09-15 13:35+0300\n"
+"Last-Translator: \n"
+"Language-Team: Bulgarian\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\accounts\account_confirm_delete.html:5
+#: .\templates\accounts\account_confirm_delete.html:36
+#: .\templates\categories\category_list.html:92
+#: .\templates\categories\category_list.html:139
+#: .\templates\categories\category_list.html:238
+#: .\templates\transactions\transaction_list.html:274
+#: .\templates\transactions\transaction_list.html:368
+msgid "Delete"
+msgstr "Изтрий"
+
+#: .\templates\accounts\account_confirm_delete.html:5
+#: .\templates\accounts\account_detail.html:5
+#: .\templates\accounts\account_form.html:5
+#: .\templates\base.html:10
+#: .\templates\base.html:23
+#: .\templates\base.html:84
+#: .\templates\dashboard\dashboard.html:5
+#: .\templates\users\email_verification_failed.html:5
+#: .\templates\users\email_verified.html:5
+#: .\templates\users\emails\two_factor_code.html:60
+#: .\templates\users\emails\verify_email.html:55
+#: .\templates\users\login.html:5
+#: .\templates\users\register.html:5
+#: .\templates\users\registration_success.html:5
+#: .\templates\users\verify_2fa.html:5
+msgid "Budget Tracker"
+msgstr "Управление на бюджета"
+
+#: .\templates\accounts\account_confirm_delete.html:17
+msgid "Back to Account"
+msgstr "Назад към сметката"
+
+#: .\templates\accounts\account_confirm_delete.html:20
+#: .\templates\accounts\account_confirm_delete.html:85
+#: .\templates\accounts\account_detail.html:56
+msgid "Delete Account"
+msgstr "Изтрий сметката"
+
+#: .\templates\accounts\account_confirm_delete.html:23
+msgid "Permanently remove this account from your budget tracker."
+msgstr "Премахнете окончателно тази сметка от вашето управление на бюджета."
+
+#: .\templates\accounts\account_confirm_delete.html:40
+msgid "You are about to delete this account. This action cannot be undone."
+msgstr "На път сте да изтриете тази сметка. Това действие не може да бъде отменено."
+
+#: .\templates\accounts\account_confirm_delete.html:78
+#: .\templates\accounts\account_form.html:108
+#: .\templates\categories\category_confirm_delete.html:64
+#: .\templates\categories\category_form.html:92
+#: .\templates\categories\subcategory_confirm_delete.html:71
+#: .\templates\categories\subcategory_form.html:68
+#: .\templates\transactions\transaction_confirm_delete.html:167
+#: .\templates\transactions\transaction_form.html:206
+#: .\templates\transactions\transfer_confirm_delete.html:126
+#: .\templates\transactions\transfer_form.html:216
+msgid "Cancel"
+msgstr "Отказ"
+
+#: .\templates\accounts\account_detail.html:18
+msgid "Back to Accounts"
+msgstr "Назад към сметките"
+
+#: .\templates\accounts\account_detail.html:49
+msgid "Edit Account"
+msgstr "Редактирай сметката"
+
+#: .\templates\accounts\account_detail.html:67
+msgid "Current Balance"
+msgstr "Текущ баланс"
+
+#: .\templates\accounts\account_detail.html:83
+msgid "Transaction History"
+msgstr "История на транзакциите"
+
+#: .\templates\accounts\account_detail.html:86
+msgid "All transactions associated with this account."
+msgstr "Всички транзакции, свързани с тази сметка."
+
+#: .\templates\accounts\account_detail.html:102
+#: .\templates\transactions\transaction_confirm_delete.html:108
+#: .\templates\transactions\transfer_confirm_delete.html:97
+msgid "Date"
+msgstr "Дата"
+
+#: .\templates\accounts\account_detail.html:103
+#: .\templates\categories\category_form.html:73
+#: .\templates\transactions\transaction_confirm_delete.html:53
+#: .\templates\transactions\transaction_form.html:45
+#: .\templates\transactions\transaction_list.html:47
+msgid "Type"
+msgstr "Тип"
+
+#: .\templates\accounts\account_detail.html:104
+#: .\templates\categories\subcategory_form.html:36
+#: .\templates\transactions\transaction_confirm_delete.html:64
+#: .\templates\transactions\transaction_form.html:63
+#: .\templates\transactions\transaction_list.html:75
+msgid "Category"
+msgstr "Категория"
+
+#: .\templates\accounts\account_detail.html:105
+#: .\templates\transactions\transaction_confirm_delete.html:136
+msgid "Description"
+msgstr "Описание"
+
+#: .\templates\accounts\account_detail.html:106
+#: .\templates\transactions\transaction_confirm_delete.html:94
+#: .\templates\transactions\transaction_form.html:117
+#: .\templates\transactions\transfer_confirm_delete.html:75
+#: .\templates\transactions\transfer_form.html:92
+msgid "Amount"
+msgstr "Сума"
+
+#: .\templates\accounts\account_detail.html:128
+msgid "Expense"
+msgstr "Разход"
+
+#: .\templates\accounts\account_detail.html:134
+#: .\templates\dashboard\dashboard.html:51
+#: .\templates\transactions\transaction_list.html:60
+msgid "Income"
+msgstr "Приход"
+
+#: .\templates\accounts\account_detail.html:140
+#: .\templates\accounts\account_detail.html:146
+#: .\templates\transactions\transaction_list.html:26
+#: .\templates\transactions\transaction_list.html:224
+msgid "Transfer"
+msgstr "Превод"
+
+#: .\templates\accounts\account_detail.html:168
+#: .\templates\transactions\transaction_list.html:164
+#: .\templates\transactions\transfer_confirm_delete.html:64
+msgid "To"
+msgstr "До"
+
+#: .\templates\accounts\account_detail.html:172
+#: .\templates\transactions\transaction_list.html:150
+#: .\templates\transactions\transfer_confirm_delete.html:53
+msgid "From"
+msgstr "От"
+
+#: .\templates\accounts\account_detail.html:233
+#: .\templates\dashboard\dashboard.html:298
+msgid "No transactions yet"
+msgstr "Все още няма транзакции"
+
+#: .\templates\accounts\account_detail.html:237
+msgid "Transactions will appear here once you add income, expenses or transfers."
+msgstr "Транзакциите ще се показват тук, след като добавите приходи, разходи или преводи."
+
+#: .\templates\accounts\account_form.html:16
+msgid "Add a new account to your budget tracker."
+msgstr "Добавете нова сметка към вашето управление на бюджета."
+
+#: .\templates\accounts\account_form.html:38
+msgid "Account name"
+msgstr "Име на сметката"
+
+#: .\templates\accounts\account_form.html:49
+#: .\templates\categories\category_form.html:58
+msgid "Emoji"
+msgstr "Емоджи"
+
+#: .\templates\accounts\account_form.html:60
+msgid "Color"
+msgstr "Цвят"
+
+#: .\templates\accounts\account_form.html:71
+msgid "Currency"
+msgstr "Валута"
+
+#: .\templates\accounts\account_form.html:82
+msgid "Opening balance"
+msgstr "Начален баланс"
+
+#: .\templates\accounts\account_form.html:93
+msgid "Display order"
+msgstr "Ред на показване"
+
+#: .\templates\accounts\account_list.html:5
+msgid "Accounts - Budget Tracker"
+msgstr "Сметки - Управление на бюджета"
+
+#: .\templates\accounts\account_list.html:11
+#: .\templates\dashboard\dashboard.html:100
+msgid "My Accounts"
+msgstr "Моите сметки"
+
+#: .\templates\accounts\account_list.html:13
+msgid "Manage your cash, bank accounts and other balances."
+msgstr "Управлявайте вашите налични средства, банкови сметки и други баланси."
+
+#: .\templates\accounts\account_list.html:18
+msgid "Add Account"
+msgstr "Добави сметка"
+
+#: .\templates\accounts\account_list.html:58
+msgid "Drag to reorder account"
+msgstr "Плъзнете, за да промените реда на сметката"
+
+#: .\templates\accounts\account_list.html:59
+msgid "Drag to reorder"
+msgstr "Плъзнете, за да промените реда"
+
+#: .\templates\accounts\account_list.html:70
+msgid "Balance"
+msgstr "Баланс"
+
+#: .\templates\accounts\account_list.html:94
+#: .\templates\dashboard\dashboard.html:188
+msgid "No accounts yet"
+msgstr "Все още няма сметки"
+
+#: .\templates\accounts\account_list.html:97
+msgid "Create your first account to start tracking your budget."
+msgstr "Създайте първата си сметка, за да започнете да следите бюджета си."
+
+#: .\templates\accounts\account_list.html:104
+msgid "Create Your First Account"
+msgstr "Създай първата си сметка"
+
+#: .\templates\base.html:31
+#: .\templates\dashboard\dashboard.html:5
+#: .\templates\dashboard\dashboard.html:15
+msgid "Dashboard"
+msgstr "Табло"
+
+#: .\templates\base.html:35
+msgid "Accounts"
+msgstr "Сметки"
+
+#: .\templates\base.html:39
+#: .\templates\transactions\transaction_list.html:5
+#: .\templates\transactions\transaction_list.html:12
+msgid "Transactions"
+msgstr "Транзакции"
+
+#: .\templates\base.html:55
+msgid "Logout"
+msgstr "Изход"
+
+#: .\templates\categories\category_confirm_delete.html:5
+#: .\templates\categories\category_confirm_delete.html:16
+#: .\templates\categories\category_confirm_delete.html:71
+msgid "Delete Category"
+msgstr "Изтрий категорията"
+
+#: .\templates\categories\category_confirm_delete.html:11
+#: .\templates\categories\category_form.html:11
+#: .\templates\categories\subcategory_confirm_delete.html:14
+#: .\templates\categories\subcategory_form.html:11
+msgid "Back to Categories"
+msgstr "Назад към категориите"
+
+#: .\templates\categories\category_confirm_delete.html:18
+msgid "Confirm that you want to delete this category."
+msgstr "Потвърдете, че искате да изтриете тази категория."
+
+#: .\templates\categories\category_confirm_delete.html:29
+#: .\templates\categories\subcategory_confirm_delete.html:32
+#: .\templates\transactions\transaction_confirm_delete.html:41
+#: .\templates\transactions\transfer_confirm_delete.html:41
+msgid "Are you sure?"
+msgstr "Сигурни ли сте?"
+
+#: .\templates\categories\category_confirm_delete.html:32
+msgid "You are about to permanently delete this custom category:"
+msgstr "На път сте да изтриете окончателно тази персонализирана категория:"
+
+#: .\templates\categories\category_confirm_delete.html:45
+#: .\templates\categories\category_list.html:62
+#: .\templates\categories\category_list.html:125
+#: .\templates\categories\category_list.html:207
+#: .\templates\categories\category_list.html:269
+#: .\templates\categories\subcategory_confirm_delete.html:48
+msgid "Custom"
+msgstr "Персонализирана"
+
+#: .\templates\categories\category_confirm_delete.html:52
+#: .\templates\categories\subcategory_confirm_delete.html:59
+msgid "This action cannot be undone."
+msgstr "Това действие не може да бъде отменено."
+
+#: .\templates\categories\category_form.html:20
+msgid "Update your custom category."
+msgstr "Редактирайте вашата персонализирана категория."
+
+#: .\templates\categories\category_form.html:24
+msgid "Create a custom category for your budget."
+msgstr "Създайте персонализирана категория за вашия бюджет."
+
+#: .\templates\categories\category_form.html:43
+#: .\templates\categories\subcategory_form.html:50
+msgid "Name"
+msgstr "Име"
+
+#: .\templates\categories\category_form.html:100
+msgid "Save Changes"
+msgstr "Запази промените"
+
+#: .\templates\categories\category_form.html:102
+#: .\templates\categories\category_list.html:23
+msgid "Create Category"
+msgstr "Създай категория"
+
+#: .\templates\categories\category_list.html:5
+#: .\templates\categories\category_list.html:12
+msgid "Categories"
+msgstr "Категории"
+
+#: .\templates\categories\category_list.html:14
+msgid "Manage your expense and income categories."
+msgstr "Управлявайте категориите си за разходи и приходи."
+
+#: .\templates\categories\category_list.html:34
+msgid "Expense Categories"
+msgstr "Категории за разходи"
+
+#: .\templates\categories\category_list.html:58
+#: .\templates\categories\category_list.html:119
+#: .\templates\categories\category_list.html:201
+#: .\templates\categories\category_list.html:263
+msgid "Default"
+msgstr "По подразбиране"
+
+#: .\templates\categories\category_list.html:76
+#: .\templates\categories\category_list.html:222
+#: .\templates\transactions\transaction_form.html:81
+msgid "Subcategory"
+msgstr "Подкатегория"
+
+#: .\templates\categories\category_list.html:85
+#: .\templates\categories\category_list.html:132
+#: .\templates\categories\category_list.html:231
+#: .\templates\transactions\transaction_list.html:267
+#: .\templates\transactions\transaction_list.html:361
+msgid "Edit"
+msgstr "Редактирай"
+
+#: .\templates\categories\category_list.html:161
+msgid "No expense categories available."
+msgstr "Няма налични категории за разходи."
+
+#: .\templates\categories\category_list.html:176
+msgid "Income Categories"
+msgstr "Категории за приходи"
+
+#: .\templates\categories\category_list.html:289
+msgid "No income categories available."
+msgstr "Няма налични категории за приходи."
+
+#: .\templates\categories\subcategory_confirm_delete.html:5
+#: .\templates\categories\subcategory_confirm_delete.html:19
+#: .\templates\categories\subcategory_confirm_delete.html:78
+msgid "Delete Subcategory"
+msgstr "Изтрий подкатегорията"
+
+#: .\templates\categories\subcategory_confirm_delete.html:21
+msgid "Confirm that you want to delete this subcategory."
+msgstr "Потвърдете, че искате да изтриете тази подкатегория."
+
+#: .\templates\categories\subcategory_confirm_delete.html:35
+msgid "You are about to permanently delete this custom subcategory:"
+msgstr "На път сте да изтриете окончателно тази персонализирана подкатегория:"
+
+#: .\templates\categories\subcategory_form.html:18
+msgid "Create a custom subcategory."
+msgstr "Създайте персонализирана подкатегория."
+
+#: .\templates\categories\subcategory_form.html:75
+msgid "Create Subcategory"
+msgstr "Създай подкатегория"
+
+#: .\templates\dashboard\dashboard.html:18
+#, python-format
+msgid "Welcome back, %(username)s!"
+msgstr "Добре дошли отново, %(username)s!"
+
+#: .\templates\dashboard\dashboard.html:23
+#: .\templates\transactions\transaction_form.html:5
+#: .\templates\transactions\transaction_form.html:18
+#: .\templates\transactions\transaction_list.html:22
+msgid "Add Transaction"
+msgstr "Добави транзакция"
+
+#: .\templates\dashboard\dashboard.html:33
+msgid "Total Balance"
+msgstr "Общ баланс"
+
+#: .\templates\dashboard\dashboard.html:41
+#, python-format
+msgid ""
+"\n"
+"                    Across %(counter)s account\n"
+"                "
+msgid_plural ""
+"\n"
+"                    Across %(counter)s accounts\n"
+"                "
+msgstr[0] ""
+"\n"
+"                    В %(counter)s сметка\n"
+"                "
+msgstr[1] ""
+"\n"
+"                    В %(counter)s сметки\n"
+"                "
+
+#: .\templates\dashboard\dashboard.html:59
+msgid "Total income"
+msgstr "Общо приходи"
+
+#: .\templates\dashboard\dashboard.html:65
+#: .\templates\transactions\transaction_list.html:55
+msgid "Expenses"
+msgstr "Разходи"
+
+#: .\templates\dashboard\dashboard.html:73
+msgid "Total expenses"
+msgstr "Общо разходи"
+
+#: .\templates\dashboard\dashboard.html:79
+msgid "Net Cash Flow"
+msgstr "Нетен паричен поток"
+
+#: .\templates\dashboard\dashboard.html:87
+msgid "Income minus expenses"
+msgstr "Приходи минус разходи"
+
+#: .\templates\dashboard\dashboard.html:103
+msgid "Your active accounts and current balances."
+msgstr "Вашите активни сметки и текущите им баланси."
+
+#: .\templates\dashboard\dashboard.html:111
+#: .\templates\dashboard\dashboard.html:227
+#: .\templates\dashboard\dashboard.html:409
+msgid "View all"
+msgstr "Виж всички"
+
+#: .\templates\dashboard\dashboard.html:175
+msgid "Exchange rate unavailable"
+msgstr "Липсва обменен курс"
+
+#: .\templates\dashboard\dashboard.html:191
+msgid "Create your first account to start tracking your money."
+msgstr "Създайте първата си сметка, за да започнете да следите парите си."
+
+#: .\templates\dashboard\dashboard.html:198
+#: .\templates\users\register.html:5
+msgid "Create Account"
+msgstr "Създай сметка"
+
+#: .\templates\dashboard\dashboard.html:216
+msgid "Recent Transactions"
+msgstr "Последни транзакции"
+
+#: .\templates\dashboard\dashboard.html:219
+msgid "Your latest income and expenses."
+msgstr "Вашите последни приходи и разходи."
+
+#: .\templates\dashboard\dashboard.html:301
+msgid "Your recent transactions will appear here."
+msgstr "Последните ви транзакции ще се показват тук."
+
+#: .\templates\dashboard\dashboard.html:319
+msgid "Income vs Expenses"
+msgstr "Приходи спрямо разходи"
+
+#: .\templates\dashboard\dashboard.html:322
+msgid "Monthly income and expenses for the last 12 months."
+msgstr "Месечни приходи и разходи за последните 12 месеца."
+
+#: .\templates\dashboard\dashboard.html:350
+msgid "Expenses by Category"
+msgstr "Разходи по категории"
+
+#: .\templates\dashboard\dashboard.html:353
+msgid "Where your money is going."
+msgstr "Къде отиват парите ви."
+
+#: .\templates\dashboard\dashboard.html:378
+msgid "No expenses recorded yet."
+msgstr "Все още няма записани разходи."
+
+#: .\templates\dashboard\dashboard.html:397
+msgid "Recent Transfers"
+msgstr "Последни преводи"
+
+#: .\templates\dashboard\dashboard.html:400
+msgid "Money moved between accounts."
+msgstr "Пари, преместени между сметки."
+
+#: .\templates\dashboard\dashboard.html:464
+msgid "No transfers recorded yet."
+msgstr "Все още няма записани преводи."
+
+#: .\templates\dashboard\dashboard.html:484
+msgid "Some exchange rates are missing."
+msgstr "Липсват някои обменни курсове."
+
+#: .\templates\dashboard\dashboard.html:488
+#, python-format
+msgid ""
+"\n"
+"                    We could not convert the following account balances to "
+"%(currency)s:\n"
+"                "
+msgstr ""
+"\n"
+"                    Не успяхме да конвертираме следните салда по сметки в "
+"%(currency)s:\n"
+"                "
+
+#: .\templates\dashboard\dashboard.html:516
+msgid "Some historical exchange rates are missing."
+msgstr "Липсват някои исторически обменни курсове."
+
+#: .\templates\dashboard\dashboard.html:520
+#, python-format
+msgid ""
+"\n"
+"                    Some transactions could not be converted to "
+"%(currency)s.\n"
+"                "
+msgstr ""
+"\n"
+"                    Някои транзакции не можаха да бъдат конвертирани в "
+"%(currency)s.\n"
+"                "
+
+#: .\templates\transactions\transaction_confirm_delete.html:5
+#: .\templates\transactions\transaction_confirm_delete.html:23
+#: .\templates\transactions\transaction_confirm_delete.html:175
+msgid "Delete Transaction"
+msgstr "Изтрий транзакцията"
+
+#: .\templates\transactions\transaction_confirm_delete.html:15
+#: .\templates\transactions\transaction_form.html:12
+#: .\templates\transactions\transfer_confirm_delete.html:15
+#: .\templates\transactions\transfer_form.html:12
+msgid "Back to Transactions"
+msgstr "Назад към транзакциите"
+
+#: .\templates\transactions\transaction_confirm_delete.html:26
+msgid "Confirm that you want to delete this transaction."
+msgstr "Потвърдете, че искате да изтриете тази транзакция."
+
+#: .\templates\transactions\transaction_confirm_delete.html:45
+msgid "You are about to permanently delete this transaction:"
+msgstr "На път сте да изтриете окончателно тази транзакция:"
+
+#: .\templates\transactions\transaction_confirm_delete.html:82
+#: .\templates\transactions\transaction_form.html:99
+#: .\templates\transactions\transaction_list.html:103
+msgid "Account"
+msgstr "Сметка"
+
+#: .\templates\transactions\transaction_confirm_delete.html:121
+#: .\templates\transactions\transaction_form.html:159
+msgid "Person"
+msgstr "Лице"
+
+#: .\templates\transactions\transaction_confirm_delete.html:151
+msgid "Deleting this transaction will automatically restore the affected account balance."
+msgstr "Изтриването на тази транзакция автоматично ще възстанови засегнатия баланс на сметката."
+
+#: .\templates\transactions\transaction_form.html:21
+msgid "Record an expense or income."
+msgstr "Запишете разход или приход."
+
+#: .\templates\transactions\transaction_form.html:131
+msgid "The amount must be greater than zero."
+msgstr "Сумата трябва да бъде по-голяма от нула."
+
+#: .\templates\transactions\transaction_form.html:141
+#: .\templates\transactions\transfer_form.html:167
+msgid "Date & Time"
+msgstr "Дата и час"
+
+#: .\templates\transactions\transaction_form.html:171
+#: .\templates\transactions\transaction_form.html:193
+#: .\templates\transactions\transfer_form.html:202
+msgid "Optional."
+msgstr "По избор."
+
+#: .\templates\transactions\transaction_form.html:181
+#: .\templates\transactions\transfer_form.html:188
+msgid "Comment"
+msgstr "Коментар"
+
+#: .\templates\transactions\transaction_form.html:213
+msgid "Save Transaction"
+msgstr "Запази транзакцията"
+
+#: .\templates\transactions\transaction_list.html:15
+msgid "View and manage your expenses, incomes and transfers."
+msgstr "Преглеждайте и управлявайте своите разходи, приходи и преводи."
+
+#: .\templates\transactions\transaction_list.html:51
+msgid "All"
+msgstr "Всички"
+
+#: .\templates\transactions\transaction_list.html:65
+msgid "Transfers"
+msgstr "Преводи"
+
+#: .\templates\transactions\transaction_list.html:80
+msgid "All categories"
+msgstr "Всички категории"
+
+#: .\templates\transactions\transaction_list.html:108
+msgid "All accounts"
+msgstr "Всички сметки"
+
+#: .\templates\transactions\transaction_list.html:131
+msgid "Search"
+msgstr "Търсене"
+
+#: .\templates\transactions\transaction_list.html:138
+msgid "Description, person or account..."
+msgstr "Описание, лице или сметка..."
+
+#: .\templates\transactions\transaction_list.html:180
+msgid "Apply Filters"
+msgstr "Приложи филтрите"
+
+#: .\templates\transactions\transaction_list.html:187
+msgid "Reset"
+msgstr "Нулирай"
+
+#: .\templates\transactions\transaction_list.html:391
+msgid "No transactions found"
+msgstr "Няма намерени транзакции"
+
+#: .\templates\transactions\transaction_list.html:394
+msgid "Try changing your filters or add a new transaction."
+msgstr "Опитайте да промените филтрите или добавете нова транзакция."
+
+#: .\templates\transactions\transfer_confirm_delete.html:5
+#: .\templates\transactions\transfer_confirm_delete.html:23
+#: .\templates\transactions\transfer_confirm_delete.html:134
+msgid "Delete Transfer"
+msgstr "Изтрий превода"
+
+#: .\templates\transactions\transfer_confirm_delete.html:26
+msgid "Confirm that you want to delete this transfer."
+msgstr "Потвърдете, че искате да изтриете този превод."
+
+#: .\templates\transactions\transfer_confirm_delete.html:45
+msgid "You are about to permanently delete this transfer:"
+msgstr "На път сте да изтриете окончателно този превод:"
+
+#: .\templates\transactions\transfer_confirm_delete.html:110
+msgid "Deleting this transfer will automatically restore the affected account balances."
+msgstr "Изтриването на този превод автоматично ще възстанови засегнатите салда по сметките."
+
+#: .\templates\transactions\transfer_form.html:5
+#: .\templates\transactions\transfer_form.html:19
+msgid "Transfer Money"
+msgstr "Прехвърляне на пари"
+
+#: .\templates\transactions\transfer_form.html:22
+msgid "Transfer money between your accounts."
+msgstr "Прехвърляйте пари между вашите сметки."
+
+#: .\templates\transactions\transfer_form.html:50
+msgid "From Account"
+msgstr "От сметка"
+
+#: .\templates\transactions\transfer_form.html:71
+msgid "To Account"
+msgstr "Към сметка"
+
+#: .\templates\transactions\transfer_form.html:106
+msgid "Amount taken from the source account."
+msgstr "Сума, взета от изходната сметка."
+
+#: .\templates\transactions\transfer_form.html:117
+msgid "Received Amount"
+msgstr "Получена сума"
+
+#: .\templates\transactions\transfer_form.html:131
+msgid "Amount received by the destination account."
+msgstr "Сума, получена по целевата сметка."
+
+#: .\templates\transactions\transfer_form.html:142
+msgid "Exchange Rate"
+msgstr "Обменен курс"
+
+#: .\templates\transactions\transfer_form.html:156
+msgid "Use 1 for transfers between accounts with the same currency."
+msgstr "Използвайте 1 за преводи между сметки с една и съща валута."
+
+#: .\templates\transactions\transfer_form.html:223
+msgid "Save Transfer"
+msgstr "Запази превода"
+
+#: .\templates\users\email_verification_failed.html:5
+msgid "Email Verification Failed"
+msgstr "Неуспешно потвърждение на имейла"
+
+#: .\templates\users\email_verification_failed.html:14
+msgid "Email verification failed"
+msgstr "Потвърждението на имейла не бе успешно"
+
+#: .\templates\users\email_verification_failed.html:17
+msgid "We couldn't verify your email address."
+msgstr "Не успяхме да потвърдим вашия имейл адрес."
+
+#: .\templates\users\email_verification_failed.html:23
+msgid "The verification link is invalid, expired, or has already been used."
+msgstr "Линкът за потвърждение е невалиден, изтекъл или вече е използван."
+
+#: .\templates\users\email_verification_failed.html:27
+msgid "Please request a new verification email if you still need to verify your account."
+msgstr "Ако все още трябва да потвърдите акаунта си, поискайте нов имейл за потвърждение."
+
+#: .\templates\users\email_verification_failed.html:33
+#: .\templates\users\email_verified.html:33
+msgid "Continue to login"
+msgstr "Продължи към вход"
+
+#: .\templates\users\email_verified.html:5
+msgid "Email Verified"
+msgstr "Имейлът е потвърден"
+
+#: .\templates\users\email_verified.html:14
+msgid "Email verified successfully!"
+msgstr "Имейлът е потвърден успешно!"
+
+#: .\templates\users\email_verified.html:17
+msgid "Your email address has been successfully verified."
+msgstr "Вашият имейл адрес беше успешно потвърден."
+
+#: .\templates\users\email_verified.html:23
+msgid "Your account is now ready to use."
+msgstr "Вашият акаунт вече е готов за използване."
+
+#: .\templates\users\email_verified.html:27
+msgid "You can sign in and start tracking your finances."
+msgstr "Можете да влезете и да започнете да следите финансите си."
+
+#: .\templates\users\emails\two_factor_code.html:6
+msgid "Your verification code"
+msgstr "Вашият код за потвърждение"
+
+#: .\templates\users\emails\two_factor_code.html:12
+msgid "Budget Tracker login verification"
+msgstr "Потвърждение за вход в Управление на бюджета"
+
+#: .\templates\users\emails\two_factor_code.html:16
+msgid "Hello"
+msgstr "Здравейте"
+
+#: .\templates\users\emails\two_factor_code.html:20
+msgid "We received a login attempt for your Budget Tracker account."
+msgstr "Получихме опит за вход във вашия акаунт в Управление на бюджета."
+
+#: .\templates\users\emails\two_factor_code.html:24
+msgid "Your verification code is:"
+msgstr "Вашият код за потвърждение е:"
+
+#: .\templates\users\emails\two_factor_code.html:45
+msgid "This code expires in 10 minutes."
+msgstr "Този код изтича след 10 минути."
+
+#: .\templates\users\emails\two_factor_code.html:49
+msgid "If you did not attempt to log in, you can safely ignore this email."
+msgstr "Ако не сте правили опит за вход, можете спокойно да игнорирате този имейл."
+
+#: .\templates\users\emails\two_factor_code.html:55
+msgid "For your security, never share this verification code with anyone."
+msgstr "За ваша сигурност никога не споделяйте този код за потвърждение с никого."
+
+#: .\templates\users\emails\two_factor_code.html:59
+#: .\templates\users\emails\verify_email.html:54
+msgid "Best regards,"
+msgstr "С уважение,"
+
+#: .\templates\users\emails\verify_email.html:7
+msgid "Verify your email"
+msgstr "Потвърдете вашия имейл"
+
+#: .\templates\users\emails\verify_email.html:15
+msgid "Welcome to Budget Tracker,"
+msgstr "Добре дошли в Управление на бюджета,"
+
+#: .\templates\users\emails\verify_email.html:19
+msgid "Thank you for creating your Budget Tracker account."
+msgstr "Благодарим ви, че създадохте акаунт в Управление на бюджета."
+
+#: .\templates\users\emails\verify_email.html:23
+msgid "Please verify your email address by clicking the button below:"
+msgstr "Моля, потвърдете вашия имейл адрес, като натиснете бутона по-долу:"
+
+#: .\templates\users\emails\verify_email.html:31
+msgid "Verify Email"
+msgstr "Потвърди имейла"
+
+#: .\templates\users\emails\verify_email.html:36
+msgid "This verification link expires in 24 hours."
+msgstr "Този линк за потвърждение изтича след 24 часа."
+
+#: .\templates\users\emails\verify_email.html:40
+msgid "If you did not create this account, you can safely ignore this email."
+msgstr "Ако не сте създавали този акаунт, можете спокойно да игнорирате този имейл."
+
+#: .\templates\users\emails\verify_email.html:46
+msgid "If the button does not work, copy and paste this link into your browser:"
+msgstr "Ако бутонът не работи, копирайте и поставете този линк във вашия браузър:"
+
+#: .\templates\users\login.html:14
+msgid "Welcome back"
+msgstr "Добре дошли отново"
+
+#: .\templates\users\login.html:17
+msgid "Sign in to your Budget Tracker account."
+msgstr "Влезте във вашия акаунт в Управление на бюджета."
+
+#: .\templates\users\login.html:53
+msgid "Login"
+msgstr "Вход"
+
+#: .\templates\users\login.html:59
+msgid "Don't have an account?"
+msgstr "Нямате акаунт?"
+
+#: .\templates\users\login.html:60
+msgid "Create one"
+msgstr "Създайте акаунт"
+
+#: .\templates\users\profile.html:4
+#: .\templates\users\profile.html:11
+msgid "Profile & Settings"
+msgstr "Профил и настройки"
+
+#: .\templates\users\profile.html:12
+msgid "Manage your personal information and account preferences."
+msgstr "Управлявайте личната си информация и предпочитанията на акаунта."
+
+#: .\templates\users\profile.html:21
+msgid "Profile"
+msgstr "Профил"
+
+#: .\templates\users\profile.html:22
+msgid "Your personal information."
+msgstr "Вашата лична информация."
+
+#: .\templates\users\profile.html:43
+#: .\templates\users\profile.html:54
+msgid "Profile picture"
+msgstr "Профилна снимка"
+
+#: .\templates\users\profile.html:69
+msgid "Date of birth"
+msgstr "Дата на раждане"
+
+#: .\templates\users\profile.html:83
+msgid "Country"
+msgstr "Държава"
+
+#: .\templates\users\profile.html:96
+msgid "Save profile"
+msgstr "Запази профила"
+
+#: .\templates\users\profile.html:106
+msgid "Settings"
+msgstr "Настройки"
+
+#: .\templates\users\profile.html:107
+msgid "Manage your account preferences."
+msgstr "Управлявайте предпочитанията на акаунта си."
+
+#: .\templates\users\profile.html:124
+msgid "Base currency"
+msgstr "Основна валута"
+
+#: .\templates\users\profile.html:138
+msgid "Language"
+msgstr "Език"
+
+#: .\templates\users\profile.html:152
+msgid "Two-factor authentication"
+msgstr "Двуфакторна автентикация"
+
+#: .\templates\users\profile.html:154
+msgid "Require a verification code when logging in."
+msgstr "Изисквай код за потвърждение при вход."
+
+#: .\templates\users\profile.html:171
+msgid "Save settings"
+msgstr "Запази настройките"
+
+#: .\templates\users\register.html:14
+msgid "Create your account"
+msgstr "Създайте вашия акаунт"
+
+#: .\templates\users\register.html:17
+msgid "Start tracking your finances with Budget Tracker."
+msgstr "Започнете да следите финансите си с Управление на бюджета."
+
+#: .\templates\users\register.html:111
+msgid "Create account"
+msgstr "Създай акаунт"
+
+#: .\templates\users\register.html:118
+msgid "Already have an account?"
+msgstr "Вече имате акаунт?"
+
+#: .\templates\users\register.html:119
+#: .\templates\users\registration_success.html:34
+msgid "Sign in"
+msgstr "Вход"
+
+#: .\templates\users\registration_success.html:5
+msgid "Registration Successful"
+msgstr "Регистрацията е успешна"
+
+#: .\templates\users\registration_success.html:14
+msgid "Registration successful!"
+msgstr "Регистрацията е успешна!"
+
+#: .\templates\users\registration_success.html:17
+msgid "Your Budget Tracker account has been created successfully."
+msgstr "Вашият акаунт в Управление на бюджета беше създаден успешно."
+
+#: .\templates\users\registration_success.html:23
+msgid "We've sent a verification link to your email address."
+msgstr "Изпратихме линк за потвърждение на вашия имейл адрес."
+
+#: .\templates\users\registration_success.html:27
+msgid "Please check your inbox and click the link to verify your account before signing in."
+msgstr "Моля, проверете входящата си поща и натиснете линка, за да потвърдите акаунта си преди вход."
+
+#: .\templates\users\registration_success.html:33
+msgid "Already verified?"
+msgstr "Вече сте потвърдили акаунта си?"
+
+#: .\templates\users\verify_2fa.html:5
+#: .\templates\users\verify_2fa.html:14
+msgid "Two-Factor Authentication"
+msgstr "Двуфакторна автентикация"
+
+#: .\templates\users\verify_2fa.html:17
+msgid "We've sent a verification code to your email address."
+msgstr "Изпратихме код за потвърждение на вашия имейл адрес."
+
+#: .\templates\users\verify_2fa.html:23
+msgid "Enter the 6-digit code to continue."
+msgstr "Въведете 6-цифрения код, за да продължите."
+
+#: .\templates\users\verify_2fa.html:48
+msgid "Verify"
+msgstr "Потвърди"
+
+#: .\templates\users\verify_2fa.html:54
+msgid "Back to login"
+msgstr "Назад към входа"

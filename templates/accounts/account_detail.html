@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ account.name }} - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+
+<div class="account-detail-page">
+
+    <div class="page-header">
+
+        <div>
+            <a
+                href="{% url 'accounts:account_list' %}"
+                class="back-link"
+            >
+                ← {% trans "Back to Accounts" %}
+            </a>
+
+            <div class="account-detail-heading">
+
+                <div
+                    class="account-detail-emoji"
+                    style="--account-color: {{ account.color }};"
+                >
+                    {{ account.emoji }}
+                </div>
+
+                <div>
+                    <h1>{{ account.name }}</h1>
+
+                    <p class="page-subtitle">
+                        {{ account.currency.code }}
+                        · {{ account.currency.name }}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="account-detail-actions">
+
+            <a
+                href="{% url 'accounts:account_update' account.id %}"
+                class="button button-secondary"
+            >
+                {% trans "Edit Account" %}
+            </a>
+
+            <a
+                href="{% url 'accounts:account_delete' account.id %}"
+                class="button button-danger"
+            >
+                {% trans "Delete Account" %}
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="account-summary-card">
+
+        <span class="balance-label">
+            {% trans "Current Balance" %}
+        </span>
+
+        <strong>
+            {{ account.current_balance|floatformat:2 }}
+            {{ account.currency.symbol }}
+        </strong>
+
+    </div>
+
+
+    <section class="transactions-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>{% trans "Transaction History" %}</h2>
+
+                <p>
+                    {% trans "All transactions associated with this account." %}
+                </p>
+            </div>
+
+        </div>
+
+
+        {% if history %}
+
+            <div class="transactions-table-wrapper">
+
+                <table class="transactions-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>{% trans "Date" %}</th>
+                            <th>{% trans "Type" %}</th>
+                            <th>{% trans "Category" %}</th>
+                            <th>{% trans "Description" %}</th>
+                            <th>{% trans "Amount" %}</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for item in history %}
+
+                            <tr>
+
+                                <td>
+                                    {{ item.occurred_at|date:"d.m.Y H:i" }}
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.kind == "expense" %}
+
+                                        <span class="transaction-type transaction-type-expense">
+                                            {% trans "Expense" %}
+                                        </span>
+
+                                    {% elif item.kind == "income" %}
+
+                                        <span class="transaction-type transaction-type-income">
+                                            {% trans "Income" %}
+                                        </span>
+
+                                    {% elif item.kind == "transfer-out" %}
+
+                                        <span class="transaction-type transaction-type-transfer">
+                                            {% trans "Transfer" %} →
+                                        </span>
+
+                                    {% elif item.kind == "transfer-in" %}
+
+                                        <span class="transaction-type transaction-type-transfer">
+                                            {% trans "Transfer" %} ←
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.category %}
+
+                                        {{ item.category.name }}
+
+                                        {% if item.subcategory %}
+                                            <span class="transaction-subcategory">
+                                                · {{ item.subcategory.name }}
+                                            </span>
+                                        {% endif %}
+
+                                    {% elif item.kind == "transfer-out" %}
+
+                                        {% trans "To" %} {{ item.transfer_account.name }}
+
+                                    {% elif item.kind == "transfer-in" %}
+
+                                        {% trans "From" %} {{ item.transfer_account.name }}
+
+                                    {% else %}
+
+                                        —
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.description %}
+                                        {{ item.description }}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.amount > 0 %}
+
+                                        <span class="transaction-amount transaction-amount-positive">
+                                            +{{ item.amount|floatformat:2 }}
+                                            {{ item.currency.symbol }}
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="transaction-amount transaction-amount-negative">
+                                            {{ item.amount|floatformat:2 }}
+                                            {{ item.currency.symbol }}
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <div class="empty-state-icon">
+                    📋
+                </div>
+
+                <h2>
+                    {% trans "No transactions yet" %}
+                </h2>
+
+                <p>
+                    {% trans "Transactions will appear here once you add income, expenses or transfers." %}
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+{% endblock %}

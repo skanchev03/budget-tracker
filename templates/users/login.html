@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}Login - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <div class="auth-logo">💰</div>
+
+            <h1>{% trans "Welcome back" %}</h1>
+
+            <p>
+                {% trans "Sign in to your Budget Tracker account." %}
+            </p>
+        </div>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-field">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+
+                {% if form.username.errors %}
+                    <div class="field-error">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-field">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+
+                {% if form.password.errors %}
+                    <div class="field-error">
+                        {{ form.password.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="auth-submit">
+                {% trans "Login" %}
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>
+                {% trans "Don't have an account?" %}
+                <a href="{% url 'register' %}">{% trans "Create one" %}</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Categories" %}{% endblock %}
+
+{% block content %}
+<div class="page-container">
+
+    <div class="page-header">
+        <div>
+            <h1>{% trans "Categories" %}</h1>
+            <p class="page-subtitle">
+                {% trans "Manage your expense and income categories." %}
+            </p>
+        </div>
+
+        <div class="page-header-actions">
+            <a
+                href="{% url 'categories:category_create' %}"
+                class="button button-primary"
+            >
+                + {% trans "Create Category" %}
+            </a>
+        </div>
+    </div>
+
+
+    <!-- Expense Categories -->
+
+    <div class="categories-section">
+
+        <div class="section-header">
+            <h2>{% trans "Expense Categories" %}</h2>
+        </div>
+
+        <div class="category-list">
+
+            {% for category in categories %}
+
+                {% if category.type == "EXPENSE" %}
+
+                    <div class="category-card">
+
+                        <div class="category-card-header">
+
+                            <div class="category-title">
+
+                                <span class="category-emoji">
+                                    {{ category.emoji }}
+                                </span>
+
+                                <div>
+                                    <h3>{{ category.name }}</h3>
+
+                                    {% if category.is_default %}
+                                        <span class="category-badge">
+                                            {% trans "Default" %}
+                                        </span>
+                                    {% else %}
+                                        <span class="category-badge custom">
+                                            {% trans "Custom" %}
+                                        </span>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+
+                            <div class="category-actions">
+
+                                <a
+                                    href="{% url 'categories:subcategory_create' %}"
+                                    class="button button-small button-secondary"
+                                >
+                                    + {% trans "Subcategory" %}
+                                </a>
+
+                                {% if not category.is_default %}
+
+                                    <a
+                                        href="{% url 'categories:category_update' category.id %}"
+                                        class="button button-small button-secondary"
+                                    >
+                                        {% trans "Edit" %}
+                                    </a>
+
+                                    <a
+                                        href="{% url 'categories:category_delete' category.id %}"
+                                        class="button button-small button-danger"
+                                    >
+                                        {% trans "Delete" %}
+                                    </a>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="subcategory-list">
+
+                            {% for subcategory in subcategories %}
+
+                                {% if subcategory.category_id == category.id %}
+
+                                    <div class="subcategory-item">
+
+                                        <span>
+                                            {{ subcategory.name }}
+                                        </span>
+
+                                        <div class="subcategory-actions">
+
+                                            {% if subcategory.is_default %}
+
+                                                <span class="subcategory-badge">
+                                                    {% trans "Default" %}
+                                                </span>
+
+                                            {% else %}
+
+                                                <span class="subcategory-badge custom">
+                                                    {% trans "Custom" %}
+                                                </span>
+
+                                                <a
+                                                    href="{% url 'categories:subcategory_update' subcategory.id %}"
+                                                    class="button button-small button-secondary"
+                                                >
+                                                    {% trans "Edit" %}
+                                                </a>
+
+                                                <a
+                                                    href="{% url 'categories:subcategory_delete' subcategory.id %}"
+                                                    class="button button-small button-danger"
+                                                >
+                                                    {% trans "Delete" %}
+                                                </a>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            {% empty %}
+
+                <p class="empty-message">
+                    {% trans "No expense categories available." %}
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Income Categories -->
+
+    <div class="categories-section">
+
+        <div class="section-header">
+            <h2>{% trans "Income Categories" %}</h2>
+        </div>
+
+        <div class="category-list">
+
+            {% for category in categories %}
+
+                {% if category.type == "INCOME" %}
+
+                    <div class="category-card">
+
+                        <div class="category-card-header">
+
+                            <div class="category-title">
+
+                                <span class="category-emoji">
+                                    {{ category.emoji }}
+                                </span>
+
+                                <div>
+                                    <h3>{{ category.name }}</h3>
+
+                                    {% if category.is_default %}
+
+                                        <span class="category-badge">
+                                            {% trans "Default" %}
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="category-badge custom">
+                                            {% trans "Custom" %}
+                                        </span>
+
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+
+                            <div class="category-actions">
+
+                                <a
+                                    href="{% url 'categories:subcategory_create' %}"
+                                    class="button button-small button-secondary"
+                                >
+                                    + {% trans "Subcategory" %}
+                                </a>
+
+                                {% if not category.is_default %}
+
+                                    <a
+                                        href="{% url 'categories:category_update' category.id %}"
+                                        class="button button-small button-secondary"
+                                    >
+                                        {% trans "Edit" %}
+                                    </a>
+
+                                    <a
+                                        href="{% url 'categories:category_delete' category.id %}"
+                                        class="button button-small button-danger"
+                                    >
+                                        {% trans "Delete" %}
+                                    </a>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="subcategory-list">
+
+                            {% for subcategory in subcategories %}
+
+                                {% if subcategory.category_id == category.id %}
+
+                                    <div class="subcategory-item">
+
+                                        <span>
+                                            {{ subcategory.name }}
+                                        </span>
+
+                                        {% if subcategory.is_default %}
+
+                                            <span class="subcategory-badge">
+                                                {% trans "Default" %}
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="subcategory-badge custom">
+                                                {% trans "Custom" %}
+                                            </span>
+
+                                        {% endif %}
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            {% empty %}
+
+                <p class="empty-message">
+                    {% trans "No income categories available." %}
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

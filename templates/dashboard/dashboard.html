@@ -1,0 +1,549 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block title %}{% trans "Dashboard" %} - {% trans "Budget Tracker" %}{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <!-- DASHBOARD HEADER -->
+    <div class="dashboard-header">
+
+        <div>
+            <h1>{% trans "Dashboard" %}</h1>
+
+            <p class="dashboard-subtitle">
+                {% blocktrans with username=user.username %}Welcome back, {{ username }}!{% endblocktrans %}
+            </p>
+        </div>
+
+        <a href="{% url 'transaction-create' %}" class="btn btn-primary">
+            + {% trans "Add Transaction" %}
+        </a>
+
+    </div>
+
+
+    <!-- SUMMARY CARDS -->
+    <section class="dashboard-summary">
+
+        <div class="dashboard-card balance-card">
+            <div class="card-label">{% trans "Total Balance" %}</div>
+
+            <div class="card-value">
+                {{ total_balance|floatformat:2 }}
+                {{ base_currency.code }}
+            </div>
+
+            <div class="card-description">
+                {% blocktrans count counter=account_count %}
+                    Across {{ counter }} account
+                {% plural %}
+                    Across {{ counter }} accounts
+                {% endblocktrans %}
+            </div>
+        </div>
+
+
+        <div class="dashboard-card income-card">
+            <div class="card-label">{% trans "Income" %}</div>
+
+            <div class="card-value">
+                +{{ income|floatformat:2 }}
+                {{ base_currency.code }}
+            </div>
+
+            <div class="card-description">
+                {% trans "Total income" %}
+            </div>
+        </div>
+
+
+        <div class="dashboard-card expense-card">
+            <div class="card-label">{% trans "Expenses" %}</div>
+
+            <div class="card-value">
+                -{{ expenses|floatformat:2 }}
+                {{ base_currency.code }}
+            </div>
+
+            <div class="card-description">
+                {% trans "Total expenses" %}
+            </div>
+        </div>
+
+
+        <div class="dashboard-card cash-flow-card">
+            <div class="card-label">{% trans "Net Cash Flow" %}</div>
+
+            <div class="card-value">
+                {{ net_cash_flow|floatformat:2 }}
+                {{ base_currency.code }}
+            </div>
+
+            <div class="card-description">
+                {% trans "Income minus expenses" %}
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ACCOUNTS -->
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>{% trans "My Accounts" %}</h2>
+
+                <p>
+                    {% trans "Your active accounts and current balances." %}
+                </p>
+            </div>
+
+            <a
+                href="{% url 'accounts:account_list' %}"
+                class="section-link"
+            >
+                {% trans "View all" %}
+            </a>
+
+        </div>
+
+
+        <div class="accounts-grid">
+
+            {% for item in account_balances %}
+
+                <a
+                    href="{% url 'accounts:account_detail' item.account.id %}"
+                    class="account-card"
+                    style="--account-color: {{ item.account.color }};"
+                >
+
+                    <div class="account-card-top">
+
+                        <div class="account-icon">
+                            {{ item.account.emoji }}
+                        </div>
+
+                        <div class="account-info">
+
+                            <h3>
+                                {{ item.account.name }}
+                            </h3>
+
+                            <span>
+                                {{ item.currency.code }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="account-balance">
+
+                        {% if item.converted_balance is not None %}
+
+                            <strong>
+                                {{ item.original_balance|floatformat:2 }}
+                                {{ item.currency.code }}
+                            </strong>
+
+                            {% if item.currency.code != base_currency.code %}
+
+                                <small>
+                                    ≈
+                                    {{ item.converted_balance|floatformat:2 }}
+                                    {{ base_currency.code }}
+                                </small>
+
+                            {% endif %}
+
+                        {% else %}
+
+                            <strong>
+                                {{ item.original_balance|floatformat:2 }}
+                                {{ item.currency.code }}
+                            </strong>
+
+                            <small class="warning-text">
+                                {% trans "Exchange rate unavailable" %}
+                            </small>
+
+                        {% endif %}
+
+                    </div>
+
+                </a>
+
+            {% empty %}
+
+                <div class="empty-state">
+
+                    <h3>{% trans "No accounts yet" %}</h3>
+
+                    <p>
+                        {% trans "Create your first account to start tracking your money." %}
+                    </p>
+
+                    <a
+                        href="{% url 'accounts:account_create' %}"
+                        class="btn btn-primary"
+                    >
+                        {% trans "Create Account" %}
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- RECENT TRANSACTIONS -->
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>{% trans "Recent Transactions" %}</h2>
+
+                <p>
+                    {% trans "Your latest income and expenses." %}
+                </p>
+            </div>
+
+            <a
+                href="{% url 'transaction-list' %}"
+                class="section-link"
+            >
+                {% trans "View all" %}
+            </a>
+
+        </div>
+
+
+        <div class="activity-card">
+
+            {% for transaction in recent_transactions %}
+
+                <div class="activity-row">
+
+                    <div class="activity-icon">
+
+                        {% if transaction.type == "EXPENSE" %}
+                            ↓
+                        {% else %}
+                            ↑
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="activity-main">
+
+                        <strong>
+                            {{ transaction.category.name }}
+                        </strong>
+
+                        <span>
+                            {{ transaction.subcategory.name }}
+                            ·
+                            {{ transaction.account.name }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="activity-date">
+                        {{ transaction.occurred_at|date:"d.m.Y H:i" }}
+                    </div>
+
+
+                    <div
+                        class="
+                            activity-amount
+                            {% if transaction.type == 'EXPENSE' %}
+                                amount-expense
+                            {% else %}
+                                amount-income
+                            {% endif %}
+                        "
+                    >
+
+                        {% if transaction.type == "EXPENSE" %}
+                            -
+                        {% else %}
+                            +
+                        {% endif %}
+
+                        {{ transaction.amount|floatformat:2 }}
+                        {{ transaction.currency.code }}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="empty-state">
+
+                    <h3>{% trans "No transactions yet" %}</h3>
+
+                    <p>
+                        {% trans "Your recent transactions will appear here." %}
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <!-- MONTHLY INCOME VS EXPENSES -->
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>{% trans "Income vs Expenses" %}</h2>
+
+                <p>
+                    {% trans "Monthly income and expenses for the last 12 months." %}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="category-card chart-card">
+
+            <div
+                class="chart-container monthly-chart-container"
+                data-empty-title="{% trans 'No financial data yet' %}"
+                data-empty-message="{% trans 'Add your first transaction to see your income and expenses here.' %}"
+                data-create-url="{% url 'transaction-create' %}"
+            >
+                <canvas id="monthly-income-expenses-chart"></canvas>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM GRID -->
+    <div class="dashboard-columns">
+
+
+        <!-- EXPENSES BY CATEGORY -->
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>{% trans "Expenses by Category" %}</h2>
+
+                    <p>
+                        {% trans "Where your money is going." %}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="category-card chart-card">
+
+                {% if expenses_by_category %}
+
+                    <div class="chart-container">
+
+                        <canvas
+                            id="expenses-by-category-chart"
+                        ></canvas>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state">
+
+                        <p>
+                            {% trans "No expenses recorded yet." %}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT TRANSFERS -->
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>{% trans "Recent Transfers" %}</h2>
+
+                    <p>
+                        {% trans "Money moved between accounts." %}
+                    </p>
+
+                </div>
+
+                <a
+                    href="{% url 'transaction-list' %}"
+                    class="section-link"
+                >
+                    {% trans "View all" %}
+                </a>
+
+            </div>
+
+
+            <div class="activity-card">
+
+                {% for transfer in recent_transfers %}
+
+                    <div class="transfer-row">
+
+                        <div class="transfer-icon">
+                            ⇄
+                        </div>
+
+
+                        <div class="transfer-main">
+
+                            <strong>
+                                {{ transfer.from_account.name }}
+                                →
+                                {{ transfer.to_account.name }}
+                            </strong>
+
+                            <span>
+                                {{ transfer.occurred_at|date:"d.m.Y H:i" }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="transfer-amount">
+
+                            {{ transfer.amount_from|floatformat:2 }}
+                            {{ transfer.from_currency.code }}
+
+                            {% if transfer.from_currency.code != transfer.to_currency.code %}
+
+                                <span>→</span>
+
+                                {{ transfer.amount_to|floatformat:2 }}
+                                {{ transfer.to_currency.code }}
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% empty %}
+
+                    <div class="empty-state">
+
+                        <p>
+                            {% trans "No transfers recorded yet." %}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- MISSING EXCHANGE RATE WARNING -->
+    {% if missing_rates %}
+
+        <div class="dashboard-warning">
+
+            <strong>
+                {% trans "Some exchange rates are missing." %}
+            </strong>
+
+            <p>
+                {% blocktrans with currency=base_currency.code %}
+                    We could not convert the following account balances to {{ currency }}:
+                {% endblocktrans %}
+            </p>
+
+            <ul>
+
+                {% for account in missing_rates %}
+
+                    <li>
+                        {{ account.name }}
+                        ({{ account.currency.code }})
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    {% endif %}
+
+
+    {% if missing_transaction_rates %}
+
+        <div class="dashboard-warning">
+
+            <strong>
+                {% trans "Some historical exchange rates are missing." %}
+            </strong>
+
+            <p>
+                {% blocktrans with currency=base_currency.code %}
+                    Some transactions could not be converted to {{ currency }}.
+                {% endblocktrans %}
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{{ expenses_by_category|json_script:"expense-data" }}
+
+{{ monthly_income_expenses|json_script:"monthly-income-expenses-data" }}
+
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+{% endblock %}

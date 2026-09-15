@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="form-page">
+
+    <a href="{% url 'categories:category_list' %}" class="back-link">
+        ← {% trans "Back to Categories" %}
+    </a>
+
+    <div class="page-header">
+        <div>
+            <h1>{{ title }}</h1>
+            <p class="page-subtitle">
+                {% trans "Create a custom subcategory." %}
+            </p>
+        </div>
+    </div>
+
+    <div class="form-card">
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.category.id_for_label }}">
+                    {% trans "Category" %}
+                </label>
+
+                {{ form.category }}
+
+                {% if form.category.errors %}
+                    <div class="field-error">
+                        {{ form.category.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">
+                    {% trans "Name" %}
+                </label>
+
+                {{ form.name }}
+
+                {% if form.name.errors %}
+                    <div class="field-error">
+                        {{ form.name.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'categories:category_list' %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                >
+                    {% trans "Create Subcategory" %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}

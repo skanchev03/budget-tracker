@@ -1,0 +1,100 @@
+{% load static i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% trans "Budget Tracker" %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=8">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container header-content">
+
+            <a href="{% url 'dashboard:dashboard' %}" class="logo">
+                {% trans "Budget Tracker" %}
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <nav class="main-nav">
+
+                    <a href="{% url 'dashboard:dashboard' %}">
+                        {% trans "Dashboard" %}
+                    </a>
+
+                    <a href="{% url 'accounts:account_list' %}">
+                        {% trans "Accounts" %}
+                    </a>
+
+                    <a href="{% url 'transaction-list' %}">
+                        {% trans "Transactions" %}
+                    </a>
+
+                    <a href="{% url 'categories:category_list' %}">
+                        {% trans "Categories" %}
+                    </a>
+
+                </nav>
+
+
+                <div class="user-menu">
+
+                    <a href="{% url 'profile' %}" class="user-profile-link">
+                        {{ user.username }}
+                    </a>
+
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+
+                        <button type="submit">
+                            {% trans "Logout" %}
+                        </button>
+                    </form>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+    </header>
+
+
+    <main class="main-content">
+
+        <div class="container">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <p>
+                &copy; 2026 {% trans "Budget Tracker" %}
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

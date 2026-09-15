@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Transfer Money" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-page transfer-form-page">
+
+    <a href="{% url 'transaction-list' %}" class="back-link">
+        ← {% trans "Back to Transactions" %}
+    </a>
+
+
+    <div class="page-header">
+
+        <div>
+            <h1>{% trans "Transfer Money" %}</h1>
+
+            <p class="page-subtitle">
+                {% trans "Transfer money between your accounts." %}
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="form-card">
+
+        {% if form.non_field_errors %}
+
+            <div class="form-errors">
+                {{ form.non_field_errors }}
+            </div>
+
+        {% endif %}
+
+
+        <form method="post">
+
+            {% csrf_token %}
+
+
+            <!-- From account -->
+
+            <div class="form-group">
+
+                <label for="{{ form.from_account.id_for_label }}">
+                    {% trans "From Account" %}
+                </label>
+
+                {{ form.from_account }}
+
+                {% if form.from_account.errors %}
+
+                    <div class="field-error">
+                        {{ form.from_account.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- To account -->
+
+            <div class="form-group">
+
+                <label for="{{ form.to_account.id_for_label }}">
+                    {% trans "To Account" %}
+                </label>
+
+                {{ form.to_account }}
+
+                {% if form.to_account.errors %}
+
+                    <div class="field-error">
+                        {{ form.to_account.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Source amount -->
+
+            <div class="form-group">
+
+                <label for="{{ form.amount_from.id_for_label }}">
+                    {% trans "Amount" %}
+                </label>
+
+                {{ form.amount_from }}
+
+                {% if form.amount_from.errors %}
+
+                    <div class="field-error">
+                        {{ form.amount_from.errors }}
+                    </div>
+
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "Amount taken from the source account." %}
+                </div>
+
+            </div>
+
+
+            <!-- Destination amount -->
+
+            <div class="form-group">
+
+                <label for="{{ form.amount_to.id_for_label }}">
+                    {% trans "Received Amount" %}
+                </label>
+
+                {{ form.amount_to }}
+
+                {% if form.amount_to.errors %}
+
+                    <div class="field-error">
+                        {{ form.amount_to.errors }}
+                    </div>
+
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "Amount received by the destination account." %}
+                </div>
+
+            </div>
+
+
+            <!-- Exchange rate -->
+
+            <div class="form-group">
+
+                <label for="{{ form.exchange_rate.id_for_label }}">
+                    {% trans "Exchange Rate" %}
+                </label>
+
+                {{ form.exchange_rate }}
+
+                {% if form.exchange_rate.errors %}
+
+                    <div class="field-error">
+                        {{ form.exchange_rate.errors }}
+                    </div>
+
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "Use 1 for transfers between accounts with the same currency." %}
+                </div>
+
+            </div>
+
+
+            <!-- Date and time -->
+
+            <div class="form-group">
+
+                <label for="{{ form.occurred_at.id_for_label }}">
+                    {% trans "Date & Time" %}
+                </label>
+
+                {{ form.occurred_at }}
+
+                {% if form.occurred_at.errors %}
+
+                    <div class="field-error">
+                        {{ form.occurred_at.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Comment -->
+
+            <div class="form-group">
+
+                <label for="{{ form.description.id_for_label }}">
+                    {% trans "Comment" %}
+                </label>
+
+                {{ form.description }}
+
+                {% if form.description.errors %}
+
+                    <div class="field-error">
+                        {{ form.description.errors }}
+                    </div>
+
+                {% endif %}
+
+                <div class="form-help">
+                    {% trans "Optional." %}
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'transaction-list' %}"
+                    class="button button-secondary"
+                >
+                    {% trans "Cancel" %}
+                </a>
+
+                <button
+                    type="submit"
+                    class="button button-primary"
+                >
+                    {% trans "Save Transfer" %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
