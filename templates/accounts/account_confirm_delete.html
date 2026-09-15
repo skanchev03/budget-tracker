@@ -54,7 +54,7 @@
                 </span>
 
                 <span>
-                    {{ account.current_balance }}
+                    {{ account.current_balance|floatformat:2 }}
                     {{ account.currency.symbol }}
                 </span>
             </div>

@@ -246,12 +246,12 @@
 
                             <div class="transaction-amount">
 
-                                -{{ item.amount_from }}
+                                -{{ item.amount_from|floatformat:2 }}
                                 {{ item.from_currency.code }}
 
                                 {% if item.from_currency.code != item.to_currency.code %}
 
-                                    → {{ item.amount_to }}
+                                    → {{ item.amount_to|floatformat:2 }}
                                     {{ item.to_currency.code }}
 
                                 {% endif %}
@@ -346,7 +346,7 @@
                                     +
                                 {% endif %}
 
-                                {{ item.amount }}
+                                {{ item.amount|floatformat:2 }}
                                 {{ item.currency.code }}
 
                             </div>

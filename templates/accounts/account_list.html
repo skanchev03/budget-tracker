@@ -71,7 +71,7 @@
                     </span>
 
                     <strong>
-                        {{ account.current_balance }}
+                        {{ account.current_balance|floatformat:2 }}
                         {{ account.currency.symbol }}
                     </strong>
 

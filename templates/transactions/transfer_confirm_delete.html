@@ -76,13 +76,13 @@
 
                 <strong>
 
-                    {{ transfer.amount_from }}
+                    {{ transfer.amount_from|floatformat:2 }}
                     {{ transfer.from_currency.code }}
 
                     {% if transfer.from_currency_id != transfer.to_currency_id %}
 
                         →
-                        {{ transfer.amount_to }}
+                        {{ transfer.amount_to|floatformat:2 }}
                         {{ transfer.to_currency.code }}
 
                     {% endif %}
